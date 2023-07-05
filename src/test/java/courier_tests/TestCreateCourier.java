@@ -14,14 +14,14 @@ public class TestCreateCourier {
     protected CourierGenerateRandomData courierGenerateRandomData = new CourierGenerateRandomData();
     private CourierInfo courierInfo;
     protected CourierSteps courierSteps;
-    private CourierAssertVoid courierAssertVoid;
+    private CourierAssert courierAssertVoid;
 
     @Before
     @Step("Создание данных для курьера")
     public void setUp() {
         courierSteps = new CourierSteps();
         courierInfo = courierGenerateRandomData.createCourierWithRandomData();
-        courierAssertVoid = new CourierAssertVoid();
+        courierAssertVoid = new CourierAssert();
     }
 
     @After
@@ -47,6 +47,7 @@ public class TestCreateCourier {
         courierInfo.setLogin(null);
         ValidatableResponse response = courierSteps.createCourier(courierInfo);
         courierAssertVoid.createCourierWithNotValidData(response);
+
     }
 
     @DisplayName("Тест на создание нового курьера без пароля")
@@ -74,6 +75,9 @@ public class TestCreateCourier {
     public void failedToCreateCourierWithSameLogin() {
         courierSteps.createCourier(courierInfo);
         ValidatableResponse response = courierSteps.createCourier(courierInfo);
+        CourierLoginCredintals courierLoginCredintals = CourierLoginCredintals.from(courierInfo);
+        courierId = courierSteps.courierAuthorization(courierLoginCredintals).extract().path("id");
         courierAssertVoid.createIdenteficLoginCouriers(response);
+        courierSteps.courierDelete(courierId);
     }
 }

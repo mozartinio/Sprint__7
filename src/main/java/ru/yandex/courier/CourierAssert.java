@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.apache.http.HttpStatus.*;
 
 
-public class CourierAssertVoid {
+public class CourierAssert {
     @Step("Успешное создание курьера с валидными значениями")
     public void createCourier200Ok(ValidatableResponse response) {
         response

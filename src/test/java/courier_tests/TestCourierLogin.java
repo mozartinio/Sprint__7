@@ -14,7 +14,7 @@ public class TestCourierLogin {
     protected CourierGenerateRandomData courierGenerateRandomData = new CourierGenerateRandomData();
     private CourierInfo courierInfo;
     protected CourierSteps courierSteps;
-    private CourierAssertVoid courierAssertVoid;
+    private CourierAssert courierAssertVoid;
     private CourierLoginCredintals courierLoginCredintals;
 
     @Before
@@ -24,7 +24,7 @@ public class TestCourierLogin {
         courierInfo = courierGenerateRandomData.createCourierWithRandomData();
         courierSteps.createCourier(courierInfo);
         courierLoginCredintals = CourierLoginCredintals.from(courierInfo);
-        courierAssertVoid = new CourierAssertVoid();
+        courierAssertVoid = new CourierAssert();
     }
 
     @After
